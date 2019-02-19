@@ -82,10 +82,10 @@ def buildMapping(wordlist, markovLength):
             starts.append(follow)
         addItemToTempMapping(history, follow)
     # Normalize the values in tempMapping, put them into mapping
-    for first, followset in tempMapping.iteritems():
+    for first, followset in tempMapping.items():
         total = sum(followset.values())
         # Normalizing here:
-        mapping[first] = dict([(k, v / total) for k, v in followset.iteritems()])
+        mapping[first] = dict([(k, v / total) for k, v in followset.items()])
 
 # Returns the next word in the sentence (chosen randomly),
 # given the previous ones.
@@ -97,7 +97,7 @@ def next(prevList):
     while toHashKey(prevList) not in mapping:
         prevList.pop(0)
     # Get a random word from the mapping, given prevList
-    for k, v in mapping[toHashKey(prevList)].iteritems():
+    for k, v in mapping[toHashKey(prevList)].items():
         sum += v
         if sum >= index and retval == "":
             retval = k
@@ -131,7 +131,7 @@ def main():
         markovLength = int(sys.argv [2])
 
     buildMapping(wordlist(filename), markovLength)
-    print genSentence(markovLength)
+    print(genSentence(markovLength))
 
 if __name__ == "__main__":
     main()
